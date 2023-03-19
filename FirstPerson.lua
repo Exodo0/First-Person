@@ -1,19 +1,22 @@
+-- Made by 0Adexus0
+-- Changelog:
+-- Fixed camera going through walls.
+-- Now you can change the mouse icon in the line: 17
+-- In line 10 you can change the (F) key to another to unlock the mouse in first person
 repeat wait() until game:GetService("Players").LocalPlayer.Character ~= nil
 local runService = game:GetService("RunService")
 local input = game:GetService("UserInputService")
 local players = game:GetService("Players")
-CanToggleMouse = {allowed = true; activationkey = Enum.KeyCode.F;}
+CanToggleMouse = {allowed = true; activationkey = Enum.KeyCode.F}
 CanViewBody = true
 Sensitivity = 0.2
 Smoothness = 1
-
 local cam = game.Workspace.CurrentCamera
 local player = players.LocalPlayer
 local m = player:GetMouse()
-m.Icon = "http://www.roblox.com/asset/?id=569021388" -- replaces mouse icon
+m.Icon = "http://www.roblox.com/asset/?id=284663801" -- replaces mouse icon
 local character = player.Character or player.CharacterAdded:wait()
 local humanoidpart = character.HumanoidRootPart
-
 local head = character:WaitForChild("Head")
 local CamPos,TargetCamPos = cam.CoordinateFrame.p,cam.CoordinateFrame.p 
 local AngleX,TargetAngleX = 0,0
@@ -22,7 +25,6 @@ local running = true
 local freemouse = false
 
 function updatechar()
-
 	for _, v in pairs(character:GetChildren())do
 		if CanViewBody then
 			if v.Name == 'Head' then
@@ -43,9 +45,7 @@ function updatechar()
 			v:FindFirstChild('Handle').LocalTransparencyModifier = 1
 			v:FindFirstChild('Handle').CanCollide = false
 		end
-
 	end
-
 end
 
 input.InputChanged:connect(function(inputObject)
@@ -109,5 +109,16 @@ input.InputBegan:connect(function(inputObject)
 
 	if not CanToggleMouse.allowed then
 		freemouse = false
+	end
+end)
+
+input.InputBegan:Connect(function(inputObject)
+	if inputObject.KeyCode == CanToggleMouse.activationkey then
+		freemouse = not freemouse
+		if freemouse == true then
+			game:GetService("UserInputService").MouseBehavior = Enum.MouseBehavior.Default
+		else
+			game:GetService("UserInputService").MouseBehavior = Enum.MouseBehavior.LockCenter
+		end
 	end
 end)
