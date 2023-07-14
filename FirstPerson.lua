@@ -9,7 +9,7 @@ CanViewBody = true 		-- whether you see your body
 Sensitivity = 0.6		-- anything higher would make looking up and down harder; recommend anything between 0~1
 Smoothness = 0.05		-- recommend anything between 0~1
 FieldOfView = 80		-- fov
-HeadOffset = CFrame.new(0,0.7,0) -- how far your camera is from your head
+HeadOffset = CFrame.new(0, 1.3 ,0) -- how far your camera is from your head
 
 local cam = game.Workspace.CurrentCamera
 local player = players.LocalPlayer
