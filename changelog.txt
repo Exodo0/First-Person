@@ -1,0 +1,11 @@
+Version 1.0.0 - Mar 18, 2023 
+
+1 - Add raycast verification.
+2 - Support R15.
+
+
+Version 1.0.1 - Jun 13, 2023 
+
+1 - Fix raycast (Delete Logic) 
+2 - Fix Head Camera 3 - Support Accessories.
+3 - Support new R6
