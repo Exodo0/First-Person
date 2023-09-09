@@ -45,32 +45,32 @@ local walkspeeds = {
 ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- 
 
 function updatechar()
-	
-	for _, v in pairs(character:GetChildren())do
+	for _, v in pairs(character:GetChildren()) do
 		if CanViewBody then
 			if v.Name == 'Head' then
 				v.LocalTransparencyModifier = 1
 				v.CanCollide = false
-				v.face.LocalTransparencyModifier = 1
 			end
 		else
-			if v:IsA'Part' or v:IsA'UnionOperation' or v:IsA'MeshPart' then
+			if v:IsA('MeshPart') then -- Working to new UGC Faces
+				v.LocalTransparencyModifier = 1
+				v.CanCollide = false
+			elseif v:IsA('Part') or v:IsA('UnionOperation') or v:IsA('MeshPart') then
 				v.LocalTransparencyModifier = 1
 				v.CanCollide = false
 			end
 		end
-		if v:IsA'Accessory' then
+		if v:IsA('Accessory') then
 			v:FindFirstChild('Handle').LocalTransparencyModifier = 1
 			v:FindFirstChild('Handle').CanCollide = false
 		end
-		if v:IsA'Hat' then
+		if v:IsA('Hat') then
 			v:FindFirstChild('Handle').LocalTransparencyModifier = 1
 			v:FindFirstChild('Handle').CanCollide = false
 		end
-
 	end
-	
 end
+
 
 function lerp(a, b, t)
 	return a * (1-t) + (b*t)
@@ -163,7 +163,7 @@ runService.RenderStepped:connect(function()
 		AngleY = (AngleY + dist *0.35) %360
 		cam.CameraType = Enum.CameraType.Scriptable
 		
-		cam.CoordinateFrame = CFrame.new(head.Position) 
+		cam.CoordinateFrame = CFrame.new(head .Position) 
 		* CFrame.Angles(0,math.rad(AngleY),0) 
 		* CFrame.Angles(math.rad(AngleX),0,0)
 		* HeadOffset -- offset
